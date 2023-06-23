@@ -1,15 +1,18 @@
-
 import requests
 import json
 
-class GetPrograms:
+class GetPro:
+    def get_spec(self):
+        url = "http://data.cityofnewyork.us/resource/uvks-tn5n.json"
+        spec_e= []
+        response = requests.get(url)
+        ractis = json.loads(response.text)
+        ya_m = ractis
 
-  def get_programs(self):
-    URL = "http://data.cityofnewyork.us/resource/uvks-tn5n.json"
+        for spec in ya_m :
+            spec_e.append(spec["agency"])
 
-    response = requests.get(URL)
-    return response.content
-
-
-programs = GetPrograms().get_programs()
-print(programs)
+        return  json.dumps(spec_e,indent=5)
+   
+result = GetPro().get_spec()
+print(result)
